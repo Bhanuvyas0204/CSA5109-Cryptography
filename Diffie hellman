@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int modPow(int base, int exponent, int modulus) {
+    int result = 1;
+    while (exponent > 0) {
+        if (exponent % 2 == 1) {
+            result = (result * base) % modulus;
+        }
+        base = (base * base) % modulus;
+        exponent /= 2;
+    }
+    return result;
+}
+int main() {
+    int q = 23;
+    int a = 5;
+    int x = 6;
+    int A = modPow(a, x, q);
+    int y = 15;
+    int B = modPow(a, y, q);
+    int shared_secret_Alice = A * a % q;
+    int shared_secret_Bob = B * a % q;
+    printf("Alice's shared secret: %d\n", shared_secret_Alice);
+    printf("Bob's shared secret: %d\n", shared_secret_Bob);
+
+    return 0;
+}
